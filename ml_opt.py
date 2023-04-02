@@ -1073,7 +1073,7 @@ def get_cycle_from_path(path):
 def construct_solution(problem, existing_solution=None, step=0):
     solution = []
     n = problem.get_num_customers()
-    customer_indices = range(n + 1)
+    customer_indices = list(range(n + 1))
     if config.problem == 'tsp':
         num_customers = n + 1
         if existing_solution is None:
