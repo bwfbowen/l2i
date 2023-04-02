@@ -782,7 +782,7 @@ def improve_solution_by_action(step, problem, solution, action):
     all_delta = 0.0
     num_paths = len(improved_solution)
 
-    if action in ([1, 2, 3] + range(25, 28)) or config.problem == 'tsp':
+    if action in ([1, 2, 3] + list(range(25, 28))) or config.problem == 'tsp':
         for path_index in range(num_paths):
             modified = problem.should_try(action, path_index)
             while modified:
