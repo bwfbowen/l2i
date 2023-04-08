@@ -814,7 +814,7 @@ def improve_solution_by_action(step, problem, solution, action):
     for path_index_first in range(num_paths - 1):
         for path_index_second in range(path_index_first + 1, num_paths):
             modified = problem.should_try(action, path_index_first, path_index_second)
-            if action in ([4, 5, 6, 7] + range(12, 25)):
+            if action in ([4, 5, 6, 7] + list(range(12, 25))):
                 while modified:
                     if action == 4:
                         improved_path_first, improved_path_second, delta, label = cross_two_paths(
