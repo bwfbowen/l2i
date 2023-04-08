@@ -73,6 +73,7 @@ def get_config(args=None):
     # './rollout_model_1850.ckpt'
     parser.add_argument('--save_interval', type=int, default=500, help="")
     parser.add_argument('--ckpt_save_path', type=str, default='ckpt', help="")
+    parser.add_argument('--result_save_path', type=str, default='result', help="")
     parser.add_argument('--model_to_restore', type=str, default=None, help="")
     parser.add_argument('--max_num_training_epsisodes', type=int, default=10000000, help="")
 
@@ -1929,7 +1930,9 @@ with tf.Session(config=gpu_config) as sess:
         if validate_solution(problem, best_solution, min_distance):
             print('solution={}'.format(best_solution))
             if config.model_to_restore is not None:
-                with open(f'experiment_{index_sample}.txt', 'w+') as f:
+                if not os.path.exists(config.result_save_path):
+                    os.mkdir(config.result_save_path)
+                with open(os.path.join(config.result_save_path, f'experiment_{index_sample}.txt'), 'w+') as f:
                     f.write('locations\n')
                     f.write(str(problem.locations) + '\n')
                     f.write('capacities\n')
