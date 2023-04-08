@@ -1238,7 +1238,7 @@ def reconstruct_solution(problem, existing_solution, step):
 
     solution = []
     n = problem.get_num_customers()
-    customer_indices = range(n + 1)
+    customer_indices = list(range(n + 1))
 
     candidate_indices = []
     for path_index in range(len(existing_solution)):
