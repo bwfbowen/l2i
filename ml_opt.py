@@ -1927,6 +1927,14 @@ with tf.Session(config=gpu_config) as sess:
         steps.append(min_step)
         if validate_solution(problem, best_solution, min_distance):
             print('solution={}'.format(best_solution))
+            if config.model_to_restore is not None:
+                with open(f'experiment_{index_sample}.txt', 'w+') as f:
+                    f.write('locations\n')
+                    f.write(str(problem.locations) + '\n')
+                    f.write('capacities\n')
+                    f.write(str(problem.capacities) + '\n')
+                    f.write('solution\n')
+                    f.write(str(best_solution))
         else:
             print('invalid solution')
         if not (config.use_cyclic_rollout or config.use_random_rollout):
