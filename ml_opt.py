@@ -1885,6 +1885,7 @@ with tf.Session(config=gpu_config) as sess:
                 min_distance = next_distance
                 min_step = step
                 best_solution = copy.deepcopy(next_solution)
+                best_solution_found_time = (datetime.datetime.now() - env_start_time).total_seconds()
             if (step + 1) % config.step_interval == 0:
                 print('rollout_num={}, index_sample={}, min_distance={}, min_step={}'.format(
                     step + 1, index_sample, min_distance, min_step
@@ -1939,6 +1940,10 @@ with tf.Session(config=gpu_config) as sess:
                     f.write(str(problem.capacities) + '\n')
                     f.write('solution\n')
                     f.write(str(best_solution))
+                    f.write('solution_found_steps\n')
+                    f.write(str(min_step) + '\n')
+                    f.write('solution_found_seconds\n')
+                    f.write(str(best_solution_found_time) + '\n')
         else:
             print('invalid solution')
         if not (config.use_cyclic_rollout or config.use_random_rollout):
