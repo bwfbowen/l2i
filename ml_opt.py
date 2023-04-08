@@ -1367,6 +1367,8 @@ def generate_problem():
                 locations[index + S + 1][1] = grid_centers[grid_index][1] + (np.random.uniform() - 0.5) / 1000.0
 
     capacities = get_random_capacities(len(locations))
+    print(f'Locations:\n {locations}')
+    print(f'Capacities:\n {capacities}')
     problem = Problem(locations, capacities)
     np.random.seed(config.problem_seed * 10)
     random.seed(config.problem_seed * 10)
