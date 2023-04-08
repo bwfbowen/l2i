@@ -72,6 +72,7 @@ def get_config(args=None):
 
     # './rollout_model_1850.ckpt'
     parser.add_argument('--save_interval', type=int, default=500, help="")
+    parser.add_argument('--ckpt_save_path', type=str, default='ckpt', help="")
     parser.add_argument('--model_to_restore', type=str, default=None, help="")
     parser.add_argument('--max_num_training_epsisodes', type=int, default=10000000, help="")
 
@@ -2041,7 +2042,9 @@ with tf.Session(config=gpu_config) as sess:
         timers_epoch.extend(action_timers)
         timers.append(timers_epoch)
         if config.model_to_restore is None and index_sample > 0 and index_sample % config.save_interval == 0:
-            save_path = saver.save(sess, "./rollout_model_{}_{}_{}.ckpt".format(index_sample, config.num_history_action_use, config.max_rollout_steps))
+            if not os.path.exists(config.ckpt_save_path):
+                os.mkdir(config.ckpt_save_path)
+            save_path = saver.save(sess, os.path.join(config.ckpt_save_path, "rollout_model_{}_{}_{}.ckpt".format(index_sample, config.num_history_action_use, config.max_rollout_steps)))
             print("Model saved in path: %s" % save_path)
 
     # save_path = saver.save(sess, "./rollout_model.ckpt")
