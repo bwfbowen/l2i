@@ -1939,7 +1939,7 @@ with tf.Session(config=gpu_config) as sess:
                     f.write('capacities\n')
                     f.write(str(problem.capacities) + '\n')
                     f.write('solution\n')
-                    f.write(str(best_solution))
+                    f.write(str(best_solution) + '\n')
                     f.write('solution_found_steps\n')
                     f.write(str(min_step) + '\n')
                     f.write('solution_found_seconds\n')
